@@ -38,6 +38,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
   <title>確認画面 - 動画登録</title>
 </head>
 <body>

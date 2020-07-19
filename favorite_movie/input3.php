@@ -46,6 +46,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
   <title>
     完了画面 - 動画登録
   </title>
