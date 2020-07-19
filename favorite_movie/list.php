@@ -1,19 +1,11 @@
 <?php
-  session_start();
-  
-  $dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = '';
-  
-  $dbh = new PDO($dsn, $user, $password);
-  
-  $dbh->query('SET NAMES utf8');
-  $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-  $sql = "SELECT * FROM inquiries";
-  
-  $stmt = $dbh->query($sql);
-  
-  $dbh = null;
+	require 'dbClass.php';
+	session_start();
+	
+	$dbc = new DbControl();
+	$stmt = $dbc->dbSelectAll();
+	
+	$dbh = null;
 
 ?>
 

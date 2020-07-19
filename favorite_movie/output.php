@@ -1,27 +1,19 @@
 <?php
-  session_start();
-  
-  $day=date("Y-m-d");
-  
-  $dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = '';
-  
-  $dbh = new PDO($dsn, $user, $password);
-  
-  $dbh->query('SET NAMES utf8');
-  $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-  $sql = "SELECT * FROM inquiries WHERE day= '".$day."'";
-  
-  $stmt = $dbh->query($sql);
-  
-  foreach($stmt as $value){
-    $ifm = $value['ifm'];
-    $cmt = $value['cmt'];
-    break;
-  }
-  
-  $dbh = null;
+	require 'dbClass.php';
+	session_start();
+	
+	$day=date("Y-m-d");
+	
+	$dbc = new DbControl();
+	$stmt = $dbc->dbSelectByDay($day);
+	
+	foreach($stmt as $value){
+		$ifm = $value['ifm'];
+		$cmt = $value['cmt'];
+		break;
+	}
+	
+	$dbh = null;
 ?>
 <!doctype html>
 <html>
