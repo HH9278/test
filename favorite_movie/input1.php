@@ -30,7 +30,7 @@
       $_SESSION['ifm'] = $ifm;
       $_SESSION['cmt'] = $cmt;
       
-      header('Location:http://localhost/php_form/input2.php');
+      header('Location:http://localhost/php_form/favorite_movie/input2.php');
       exit();
     }
   }

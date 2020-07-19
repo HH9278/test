@@ -38,7 +38,7 @@
     session_destroy();
     
   } else {
-    header('Location:http://localhost/php_form/input1.php');
+    header('Location:http://localhost/php_form/favorite_movie/input1.php');
     exit();
   }
 ?>

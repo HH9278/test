@@ -26,7 +26,7 @@
   $dbh = null;
   
   if(isset($ifm2)){
-    header('Location:http://localhost/php_form/input1.php');
+    header('Location:http://localhost/php_form/favorite_movie/input1.php');
   }
   
   $_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(48));
