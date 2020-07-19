@@ -1,5 +1,5 @@
 <?php
-	require 'dbClass.php';
+	require_once('dbClass.php');
 	session_start();
 	
 	if(isset($_SESSION['day'])){
