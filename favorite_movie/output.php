@@ -18,6 +18,7 @@
   foreach($stmt as $value){
     $ifm = $value['ifm'];
     $cmt = $value['cmt'];
+    break;
   }
   
   $dbh = null;
