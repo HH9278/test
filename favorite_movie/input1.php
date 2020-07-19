@@ -45,8 +45,9 @@
 
 <html>
 <head>
-<meta charset="utf-8">
-<title>動画登録</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <title>動画登録</title>
 </head>
 <body>
 <?php

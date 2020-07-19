@@ -1,8 +1,6 @@
 <?php
   session_start();
   
-  $day=date("Y-m-d");
-  
   $dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
   $user = 'root';
   $password = '';
@@ -11,38 +9,37 @@
   
   $dbh->query('SET NAMES utf8');
   $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-  $sql = "SELECT * FROM inquiries WHERE day= '".$day."'";
+  $sql = "SELECT * FROM inquiries";
   
   $stmt = $dbh->query($sql);
   
-  foreach($stmt as $value){
-    $ifm = $value['ifm'];
-    $cmt = $value['cmt'];
-    break;
-  }
-  
   $dbh = null;
+
 ?>
+
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <title>
-    動画公開
+    動画一覧
   </title>
 </head>
 <body>
   <table>
     <tr>
-      <th>日付</th><td><?php echo $day; ?></td>
+      <th>日付</th><th>コメント</th>
     </tr>
+    <?php
+      foreach($stmt as $value){
+    ?>
     <tr>
-      <th>IFRAME</th><td><?php echo htmlspecialchars_decode($ifm, ENT_QUOTES); ?></td>
+      <td><?php echo $value['day']; ?></td><td><?php echo $value['cmt']; ?></td>
     </tr>
-    <tr>
-      <th>コメント</th><td><?php echo nl2br($cmt); ?></td>
-    </tr>
+    <?php
+      }
+    ?>
   </table>
 </body>
 </html>
