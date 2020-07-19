@@ -1,46 +1,47 @@
 <!doctype html>
 <?php
-  session_start();
-  
-  $errors = array();
-  
-  if(isset($_POST['submit'])){
-    $day = $_POST['day'];
-    $ifm = $_POST['ifm'];
-    $cmt = $_POST['cmt'];
-    
-    $day = htmlspecialchars($day, ENT_QUOTES);
-    $ifm = htmlspecialchars($ifm, ENT_QUOTES);
-    $cmt = htmlspecialchars($cmt, ENT_QUOTES);
-    
-    if($day === ""){
-      $errors['day'] = "日付が入力されていません。";
-    }
-    
-    if($ifm === ""){
-      $errors['ifm'] = "IFRAMEが入力されていません。";
-    }
-    
-    if($cmt === ""){
-      $errors['cmt'] = "コメントが入力されていません。";
-    }
-    
-    if(count($errors) === 0){
-      $_SESSION['day'] = $day;
-      $_SESSION['ifm'] = $ifm;
-      $_SESSION['cmt'] = $cmt;
-      
-      header('Location:http://localhost/php_form/favorite_movie/input2.php');
-      exit();
-    }
-  }
-  if(isset($_GET['action']) && $_GET['action'] === 'edit'){
-    if(isset($_SESSION['day'])){
-      $day = $_SESSION['day'];
-      $ifm = $_SESSION['ifm'];
-      $cmt = $_SESSION['cmt'];
-    }
-  }
+	session_start();
+
+	$errors = array();
+
+	if(isset($_POST['submit'])){
+		$day = $_POST['day'];
+		$ifm = $_POST['ifm'];
+		$cmt = $_POST['cmt'];
+
+		$day = htmlspecialchars($day, ENT_QUOTES);
+		$ifm = htmlspecialchars($ifm, ENT_QUOTES);
+		$cmt = htmlspecialchars($cmt, ENT_QUOTES);
+
+		if($day === ""){
+			$errors['day'] = "日付が入力されていません。";
+		}
+
+		if($ifm === ""){
+			$errors['ifm'] = "IFRAMEが入力されていません。";
+		}
+
+		if($cmt === ""){
+			$errors['cmt'] = "コメントが入力されていません。";
+		}
+
+		if(count($errors) === 0){
+			$_SESSION['day'] = $day;
+			$_SESSION['ifm'] = $ifm;
+			$_SESSION['cmt'] = $cmt;
+			
+			header('Location:http://localhost/php_form/favorite_movie/input2.php');
+			exit();
+		}
+	}
+	
+	if(isset($_GET['action']) && $_GET['action'] === 'edit'){
+		if(isset($_SESSION['day'])){
+			$day = $_SESSION['day'];
+			$ifm = $_SESSION['ifm'];
+			$cmt = $_SESSION['cmt'];
+		}
+	}
 ?>
 
 <html>

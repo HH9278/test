@@ -1,37 +1,28 @@
 <?php
-  session_start();
-  
-  if(isset($_SESSION['day'])){
-    $day = $_SESSION['day'];
-    $ifm = $_SESSION['ifm'];
-    $cmt = $_SESSION['cmt'];
-  }
-  
-  $dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
-  $user = 'root';
-  $password = '';
-  
-  $dbh = new PDO($dsn, $user, $password);
-  
-  $dbh->query('SET NAMES utf8');
-  $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-  $sql = "SELECT * FROM inquiries WHERE day= '".$day."'";
-  
-  $stmt = $dbh->query($sql);
-  
-  foreach($stmt as $value){
-    $ifm2 = $value['ifm'];
-  }
-  
-  $dbh = null;
-  
-  if(isset($ifm2)){
-    header('Location:http://localhost/php_form/favorite_movie/input1.php');
-  }
-  
-  $_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(48));
-  $token = htmlspecialchars($_SESSION['token'],ENT_QUOTES);
-  
+	require 'dbClass.php';
+	session_start();
+	
+	if(isset($_SESSION['day'])){
+		$day = $_SESSION['day'];
+		$ifm = $_SESSION['ifm'];
+		$cmt = $_SESSION['cmt'];
+	}
+	
+	$dbc = new DbControl();
+	$stmt = $dbc->dbSelectByDay($day);
+	
+	foreach($stmt as $value){
+		$ifm2 = $value['ifm'];
+	}
+	
+	$dbh = null;
+	
+	if(isset($ifm2)){
+		header('Location:http://localhost/php_form/favorite_movie/input1.php');
+	}
+	
+	$_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(48));
+	$token = htmlspecialchars($_SESSION['token'],ENT_QUOTES);
 ?>
 
 <!doctype html>
