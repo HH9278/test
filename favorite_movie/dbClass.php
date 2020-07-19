@@ -1,7 +1,7 @@
 <?php
 	Class DbControl
 	{
-		private static function dbConnect(){
+		private function dbConnect(){
 			$dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
 			$user = 'root';
 			$password = '';
@@ -11,21 +11,21 @@
 			return $dbh;
 		}
 		
-		function dbSelectAll(){
+		public function dbSelectAll(){
 			$dbh = $this->dbConnect();
 			$sql = "SELECT * FROM inquiries ORDER BY day";
 			$stmt = $dbh->query($sql);
 			return $stmt;
 		}
 		
-		function dbSelectByDay($day){
+		public function dbSelectByDay($day){
 			$dbh = $this->dbConnect();
 			$sql = "SELECT * FROM inquiries WHERE day= '".$day."'";
 			$stmt = $dbh->query($sql);
 			return $stmt;
 		}
 		
-		function dbInsertDat($day, $ifm, $cmt){
+		public function dbInsertDat($day, $ifm, $cmt){
 			$dbh = $this->dbConnect();
 			$sql = 'INSERT INTO inquiries (day, ifm, cmt) VALUES (?, ?, ?)';
 			$stmt = $dbh->prepare($sql);
