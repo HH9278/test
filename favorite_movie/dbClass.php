@@ -1,6 +1,7 @@
 <?php
 	Class DbControl
 	{
+		// DBへ接続する
 		private function dbConnect(){
 			$dsn = 'mysql:dbname=favorite_movie;host=localhost;charset=utf8';
 			$user = 'root';
@@ -11,6 +12,7 @@
 			return $dbh;
 		}
 		
+		// DB全体をSELECTする
 		public function dbSelectAll(){
 			$dbh = $this->dbConnect();
 			$sql = "SELECT * FROM inquiries ORDER BY day";
@@ -18,6 +20,7 @@
 			return $stmt;
 		}
 		
+		// 日付指定してSELECTする
 		public function dbSelectByDay($day){
 			$dbh = $this->dbConnect();
 			$sql = "SELECT * FROM inquiries WHERE day= '".$day."'";
@@ -25,6 +28,7 @@
 			return $stmt;
 		}
 		
+		// DBへデータを挿入する
 		public function dbInsertDat($day, $ifm, $cmt){
 			$dbh = $this->dbConnect();
 			$sql = 'INSERT INTO inquiries (day, ifm, cmt) VALUES (?, ?, ?)';
