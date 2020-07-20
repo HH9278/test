@@ -46,24 +46,21 @@
 		}
 	}
 	
-	// 直近の空いている日付をデフォルト入力
+	// 日付データがない場合、直近の空いている日付をデフォルト入力
 	if(isset($day) && empty($day) || !isset($day)){
 		$dbc = new DbControl();
 		$stmt = $dbc->dbSelectAll();
-		if($stmt === false){
-			$day = date("Y-m-d");
-		} else {
-			$diff = new DateTime(date("Y-m-d"));
-			foreach($stmt as $value){
-				$dval = new DateTime($value['day']);
-				if($diff == $dval){
-					$diff->modify('+1 days');
-				}elseif($diff < $dval){
-					break;
-				}
+		
+		$diff = new DateTime(date("Y-m-d"));
+		foreach($stmt as $value){
+			$dval = new DateTime($value['day']);
+			if($diff == $dval){
+				$diff->modify('+1 days');
+			}elseif($diff < $dval){
+				break;
 			}
-			$day = $diff->format('Y-m-d');
 		}
+		$day = $diff->format('Y-m-d');
 	}
 ?>
 
