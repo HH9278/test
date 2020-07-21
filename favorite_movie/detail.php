@@ -1,0 +1,40 @@
+<?php
+	require_once('dbClass.php');
+	
+	$day = $_GET['day'];
+	
+	$dbc = new DbControl();
+	$stmt = $dbc->dbSelectByDay($day);
+	
+	$dbh = null;
+	
+	foreach($stmt as $value){
+		$ifm = $value['ifm'];
+		$cmt = $value['cmt'];
+		break;
+	}
+?>
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+	<title>確認画面 - 詳細画面</title>
+</head>
+<body>
+	<input type="hidden" name="token" value="<?php echo $token ?>">
+	<table>
+		<tr>
+			<th>日付</th><td><?php echo $day; ?></td>
+		</tr>
+		<tr>
+			<th>IFRAME</th><td><?php echo htmlspecialchars_decode($ifm, ENT_QUOTES); ?></td>
+		</tr>
+		<tr>
+			<th>コメント</th><td><?php echo nl2br($cmt); ?></td>
+		</tr>
+	</table>
+	<p><a href="list.php">一覧画面へ戻る</a></p>
+</body>
+</html>
