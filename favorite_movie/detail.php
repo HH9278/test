@@ -3,9 +3,17 @@
 	
 	$day = $_GET['day'];
 	
+	if(empty($day)){
+		exit('日付が不正です。');
+	}
+	
 	$dbc = new DbControl();
 	$stmt = $dbc->dbSelectByDay($day);
 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	if(!$result){
+		exit('データがありません。');
+	}
 	
 	$ifm = $result['ifm'];
 	$cmt = $result['cmt'];
