@@ -27,8 +27,9 @@
 		// 日付指定してSELECTする
 		public function dbSelectByDay($day){
 			$dbh 	= $this->dbConnect();
-			$sql 	= "SELECT * FROM inquiries WHERE day= '".$day."'";
-			$stmt 	= $dbh->query($sql);
+			$stmt 	= $dbh->prepare('SELECT * FROM inquiries WHERE day= :day');
+			$stmt->bindValue(':day', $day, PDO::PARAM_STR);
+			$stmt->execute();
 			return $stmt;
 		}
 		

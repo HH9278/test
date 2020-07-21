@@ -1,5 +1,6 @@
 <?php
 	require_once('dbClass.php');
+	
 	session_start();
 	
 	// セッション情報から日付、IFRAME、コメントを取得
@@ -7,23 +8,19 @@
 		$day = $_SESSION['day'];
 		$ifm = $_SESSION['ifm'];
 		$cmt = $_SESSION['cmt'];
-	}
-	
-	// DBから日付指定でSELECTする
-	$dbc = new DbControl();
-	$stmt = $dbc->dbSelectByDay($day);
-	
-	// DBの接続を削除
-	$dbh = null;
-	
-	foreach($stmt as $value){
-		$ifm2 = $value['ifm'];
-		break;
-	}
-	
-	// データがある場合、登録画面に戻る
-	if(!empty($ifm2)){
-		header('Location:http://localhost/php_form/favorite_movie/input1.php');
+		
+		// DBから日付指定でSELECTする
+		$dbc = new DbControl();
+		$stmt = $dbc->dbSelectByDay($day);
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		// DBの接続を削除
+		$dbh = null;
+		
+		// データがある場合、登録画面に戻る
+		if(!empty($result['ifm'])){
+			header('Location:http://localhost/php_form/favorite_movie/input1.php');
+		}
 	}
 	
 	// セキュリティ用トークンを発行する
