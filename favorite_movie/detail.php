@@ -5,14 +5,12 @@
 	
 	$dbc = new DbControl();
 	$stmt = $dbc->dbSelectByDay($day);
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	$ifm = $result['ifm'];
+	$cmt = $result['cmt'];
 	
 	$dbh = null;
-	
-	foreach($stmt as $value){
-		$ifm = $value['ifm'];
-		$cmt = $value['cmt'];
-		break;
-	}
 ?>
 
 <!doctype html>
