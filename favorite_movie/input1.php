@@ -102,6 +102,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
+				<a href="list.php">一覧を開く</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
 				<a href="https://www.youtube.com/?gl=JP&hl=ja" target="_blank">Youtubeを開く</a>
 			</td>
 		</tr>

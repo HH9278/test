@@ -21,7 +21,7 @@
 <body>
 	<table>
 		<tr>
-			<th>日付</th><th>コメント</th>
+			<th>日付</th><th>コメント</th><th>詳細</th><th>削除</th>
 		</tr>
 		<?php
 			// 1行ずつデータを出力する
@@ -36,6 +36,13 @@
 		<?php
 			}
 		?>
+		
+		</tr>
+		<tr>
+			<td colspan="4" align="right">
+				<a href="input1.php">登録画面を開く</a>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>
