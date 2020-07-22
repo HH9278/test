@@ -21,6 +21,8 @@
 		if(!empty($result['ifm'])){
 			header('Location:http://localhost/php_form/favorite_movie/input1.php');
 		}
+	} else {
+		exit('データがありません。');
 	}
 	
 	// セキュリティ用トークンを発行する
