@@ -40,6 +40,11 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="right">
+				<a href="output.php">今日の動画</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" align="right">
 				<a href="input1.php">登録画面を開く</a>
 			</td>
 		</tr>

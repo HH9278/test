@@ -36,6 +36,16 @@
 		<tr>
 			<th>コメント</th><td><?php echo nl2br($cmt); ?></td>
 		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<a href="input1.php">登録画面を開く</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<a href="list.php">一覧を開く</a>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>
