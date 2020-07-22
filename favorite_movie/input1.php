@@ -102,6 +102,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
+				<a href="output.php">今日の動画</a>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
 				<a href="list.php">一覧を開く</a>
 			</td>
 		</tr>
