@@ -31,6 +31,7 @@
 			<td><?php echo $value['day']; ?></td>
 			<td><?php echo $value['cmt']; ?></td>
 			<td><a href="detail.php?day=<?php echo $value['day']; ?>">詳細</a></td>
+			<td><a href="del.php?day=<?php echo $value['day']; ?>">削除</a></td>
 		</tr>
 		<?php
 			}

@@ -44,5 +44,14 @@
 			$stmt->execute();
 			$dbh = null;
 		}
+		
+		// 日付指定してデータを削除する
+		public function dbDeleteByDay($day){
+			$dbh	= $this->dbConnect();
+			$stmt	= $dbh->prepare('DELETE FROM inquiries WHERE day = :day');
+			$stmt->bindValue(':day', $day, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt;
+		}
 	}
 ?>
