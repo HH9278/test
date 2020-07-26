@@ -17,19 +17,9 @@ namespace WindowsFormsPractice
             InitializeComponent();
         }
 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // webBrowser1.Url = new Uri("http://www.google.co.jp");
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -63,6 +53,47 @@ namespace WindowsFormsPractice
             if (e.KeyCode.Equals(Keys.Enter)) {
                 browser.Url = new Uri(txtUrl.Text);
             }
+        }
+
+        // お気に入りダブルクリック時
+        private void listFavorite_DoubleClick(object sender, EventArgs e)
+        {
+            FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
+
+            browser.Url = new Uri(data.Url);
+        }
+
+        // お気に入り追加処理
+        private void btnAddFavorite_Click(object sender, EventArgs e)
+        {
+            // お気に入りデータの設定
+            FavoriteData data = new FavoriteData();
+            data.Title = browser.DocumentTitle;
+            data.Url = browser.Url.ToString();
+
+            // リストに追加
+            listFavorite.Items.Add(data);
+        }
+
+        // お気に入り削除処理
+        private void btnRemoveFavorite_Click(object sender, EventArgs e)
+        {
+            // 選択されているデータの取得
+            FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
+
+            // リストからデータを削除
+            listFavorite.Items.Remove(data);
+        }
+    }
+
+    public class FavoriteData 
+    {
+        public String Title = "";
+        public String Url = "";
+
+        public override string ToString()
+        {
+            return Title;
         }
     }
 }
