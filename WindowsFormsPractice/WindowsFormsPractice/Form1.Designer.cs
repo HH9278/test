@@ -141,9 +141,6 @@
             this.listFavorite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listFavorite.FormattingEnabled = true;
             this.listFavorite.ItemHeight = 15;
-            this.listFavorite.Items.AddRange(new object[] {
-            "https://www.google.co.jp",
-            "https://www.yahoo.co.jp"});
             this.listFavorite.Location = new System.Drawing.Point(5, 42);
             this.listFavorite.Name = "listFavorite";
             this.listFavorite.Size = new System.Drawing.Size(256, 403);
@@ -184,9 +181,9 @@
             // 
             // btnRemoveFavorite
             // 
-            this.btnRemoveFavorite.Location = new System.Drawing.Point(88, 7);
+            this.btnRemoveFavorite.Location = new System.Drawing.Point(88, 6);
             this.btnRemoveFavorite.Name = "btnRemoveFavorite";
-            this.btnRemoveFavorite.Size = new System.Drawing.Size(84, 24);
+            this.btnRemoveFavorite.Size = new System.Drawing.Size(75, 24);
             this.btnRemoveFavorite.TabIndex = 1;
             this.btnRemoveFavorite.Text = "Remove";
             this.btnRemoveFavorite.UseVisualStyleBackColor = true;
@@ -210,6 +207,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "browser";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

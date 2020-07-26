@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace WindowsFormsPractice
 {
@@ -19,7 +21,35 @@ namespace WindowsFormsPractice
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // webBrowser1.Url = new Uri("http://www.google.co.jp");
+            if (File.Exists("favorite.xml"))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<FavoriteData>));
+                List<FavoriteData> favoriteDataList = null;
+                using (StreamReader reader = new StreamReader("favorite.xml"))
+                {
+                    favoriteDataList = (List<FavoriteData>)serializer.Deserialize(reader);
+                }
+
+                for (int i = 0; i < favoriteDataList.Count; i++) { 
+                    listFavorite.Items.Add(favoriteDataList[i]);
+                }
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            List<FavoriteData> favoriteDataList = new List<FavoriteData>();
+
+            // リストボックス -> オブジェクト
+            for (int i = 0; i < listFavorite.Items.Count; i++)
+            {
+                favoriteDataList.Add((FavoriteData)(listFavorite.Items[i]));
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<FavoriteData>));
+            using (StreamWriter writer = new StreamWriter("favorite.xml", false, Encoding.UTF8)) {
+                serializer.Serialize(writer, favoriteDataList);
+            }
         }
 
         private void btnHome_Click(object sender, EventArgs e)
