@@ -111,8 +111,10 @@ namespace WindowsFormsPractice
             // 選択されているデータの取得
             FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
 
-            // リストからデータを削除
-            listFavorite.Items.Remove(data);
+            if (listFavorite.Items.Count > 0) { 
+                // リストからデータを削除
+                listFavorite.Items.Remove(data);
+            }
         }
     }
 
