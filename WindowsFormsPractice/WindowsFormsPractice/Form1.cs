@@ -96,24 +96,52 @@ namespace WindowsFormsPractice
         // お気に入り追加処理
         private void btnAddFavorite_Click(object sender, EventArgs e)
         {
-            // お気に入りデータの設定
-            FavoriteData data = new FavoriteData();
-            data.Title = browser.DocumentTitle;
-            data.Url = browser.Url.ToString();
+            if(browser.Url != null) { 
+                // お気に入りデータの設定
+                FavoriteData data = new FavoriteData();
+                data.Title = browser.DocumentTitle;
+                data.Url = browser.Url.ToString();
 
-            // リストに追加
-            listFavorite.Items.Add(data);
+                // 重複チェック
+                if (!itemExists(data))
+                {
+                    // リストに追加
+                    listFavorite.Items.Add(data);
+                }
+                else {
+                    MessageBox.Show("既に登録済みです。");
+                }
+            }
+        }
+
+        // お気に入り存在チェック
+        private bool itemExists(FavoriteData data1) {
+            for(int i = 0; i < listFavorite.Items.Count; i++){
+                FavoriteData data2 = (FavoriteData)listFavorite.Items[i];
+
+                if (data1.Url.Equals(data2.Url)){
+                    return true;
+                }
+            }
+            return false;
         }
 
         // お気に入り削除処理
         private void btnRemoveFavorite_Click(object sender, EventArgs e)
         {
-            // 選択されているデータの取得
-            FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
+            if (listFavorite.SelectedIndex >= 0)
+            {
+                // 選択されているデータの取得
+                FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
 
-            if (listFavorite.Items.Count > 0) { 
-                // リストからデータを削除
-                listFavorite.Items.Remove(data);
+                if (listFavorite.Items.Count > 0)
+                {
+                    // リストからデータを削除
+                    listFavorite.Items.Remove(data);
+                }
+            }
+            else {
+                MessageBox.Show("リストを選択してください。");
             }
         }
     }
