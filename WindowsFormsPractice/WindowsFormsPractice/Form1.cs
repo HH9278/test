@@ -34,6 +34,20 @@ namespace WindowsFormsPractice
                     listFavorite.Items.Add(favoriteDataList[i]);
                 }
             }
+
+            if (File.Exists("location.xml")) 
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(LocationSizeData));
+                LocationSizeData locationSizeData = null;
+                using (StreamReader reader = new StreamReader("location.xml"))
+                {
+                    locationSizeData = (LocationSizeData)serializer.Deserialize(reader);
+                    this.Top    = locationSizeData.top;
+                    this.Left   = locationSizeData.left;
+                    this.Width  = locationSizeData.width;
+                    this.Height = locationSizeData.height;
+                }
+            }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -50,8 +64,24 @@ namespace WindowsFormsPractice
             using (StreamWriter writer = new StreamWriter("favorite.xml", false, Encoding.UTF8)) {
                 serializer.Serialize(writer, favoriteDataList);
             }
+
+            if (this.WindowState.Equals(FormWindowState.Normal)) { 
+                LocationSizeData locationSizeData = new LocationSizeData();
+
+                locationSizeData.top    = this.Top;
+                locationSizeData.left   = this.Left;
+                locationSizeData.width  = this.Width;
+                locationSizeData.height = this.Height;
+
+                XmlSerializer serializer_l = new XmlSerializer(typeof(LocationSizeData));
+                using (StreamWriter writer = new StreamWriter("location.xml", false, Encoding.UTF8))
+                {
+                    serializer_l.Serialize(writer, locationSizeData);
+                }
+            }
         }
 
+        // ホームボタン
         private void btnHome_Click(object sender, EventArgs e)
         {
             browser.Url = new Uri("https://www.google.co.jp");
@@ -72,8 +102,8 @@ namespace WindowsFormsPractice
         // ページ移動時のイベント
         private void browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            txtUrl.Text = browser.Url.ToString();
-            btnBack.Enabled = browser.CanGoBack;
+            txtUrl.Text        = browser.Url.ToString();
+            btnBack.Enabled    = browser.CanGoBack;
             btnForward.Enabled = browser.CanGoForward;
         }
 
@@ -96,11 +126,12 @@ namespace WindowsFormsPractice
         // お気に入り追加処理
         private void btnAddFavorite_Click(object sender, EventArgs e)
         {
-            if(browser.Url != null) { 
+            if (browser.Url != null)
+            {
                 // お気に入りデータの設定
                 FavoriteData data = new FavoriteData();
-                data.Title = browser.DocumentTitle;
-                data.Url = browser.Url.ToString();
+                data.Title        = browser.DocumentTitle;
+                data.Url          = browser.Url.ToString();
 
                 // 重複チェック
                 if (!itemExists(data))
@@ -108,9 +139,13 @@ namespace WindowsFormsPractice
                     // リストに追加
                     listFavorite.Items.Add(data);
                 }
-                else {
+                else
+                {
                     MessageBox.Show("既に登録済みです。");
                 }
+            }
+            else {
+                MessageBox.Show("サイトを表示してください。");
             }
         }
 
@@ -146,6 +181,7 @@ namespace WindowsFormsPractice
         }
     }
 
+    // お気に入りデータ
     public class FavoriteData 
     {
         public String Title = "";
@@ -155,5 +191,13 @@ namespace WindowsFormsPractice
         {
             return Title;
         }
+    }
+
+    public class LocationSizeData 
+    {
+        public int top    = 0;  // Y座標
+        public int left   = 0;  // X座標
+        public int width  = 0;  // 幅
+        public int height = 0;  // 高さ
     }
 }
