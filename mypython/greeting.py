@@ -40,7 +40,7 @@ class student:
 
     def avg(self,*point):
         for avgpt in point:
-            self.avgsum = self.avgsum + avgpt    
+            self.avgsum += avgpt    
         print(self.avgsum / len(point))
 
 point = [70,80,90,65,57]
