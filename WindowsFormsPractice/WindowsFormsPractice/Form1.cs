@@ -45,10 +45,10 @@ namespace WindowsFormsPractice
                 using (StreamReader reader = new StreamReader(locationFile))
                 {
                     locationSizeData = (LocationSizeData)serializer.Deserialize(reader);
-                    this.Top    = locationSizeData.top;
-                    this.Left   = locationSizeData.left;
-                    this.Width  = locationSizeData.width;
-                    this.Height = locationSizeData.height;
+                    this.Top    = locationSizeData.GetTop();
+                    this.Left   = locationSizeData.GetLeft();
+                    this.Width  = locationSizeData.GetWidth();
+                    this.Height = locationSizeData.GetHeight();
                 }
             }
         }
@@ -71,10 +71,10 @@ namespace WindowsFormsPractice
             if (this.WindowState.Equals(FormWindowState.Normal)) { 
                 LocationSizeData locationSizeData = new LocationSizeData();
 
-                locationSizeData.top    = this.Top;
-                locationSizeData.left   = this.Left;
-                locationSizeData.width  = this.Width;
-                locationSizeData.height = this.Height;
+                locationSizeData.SetTop(this.Top);
+                locationSizeData.SetLeft(this.Left);
+                locationSizeData.SetWidth(this.Width);
+                locationSizeData.SetHeight(this.Height);
 
                 XmlSerializer serializer_l = new XmlSerializer(typeof(LocationSizeData));
                 using (StreamWriter writer = new StreamWriter(locationFile, false, Encoding.UTF8))
@@ -123,7 +123,7 @@ namespace WindowsFormsPractice
         {
             FavoriteData data = (FavoriteData)listFavorite.Items[listFavorite.SelectedIndex];
 
-            browser.Url = new Uri(data.Url);
+            browser.Url = new Uri(data.GetUrl());
         }
 
         // お気に入り追加処理
@@ -133,8 +133,8 @@ namespace WindowsFormsPractice
             {
                 // お気に入りデータの設定
                 FavoriteData data = new FavoriteData();
-                data.Title        = browser.DocumentTitle;
-                data.Url          = browser.Url.ToString();
+                data.SetTitle(browser.DocumentTitle);
+                data.SetUrl(browser.Url.ToString());
 
                 // 重複チェック
                 if (!itemExists(data))
@@ -157,7 +157,7 @@ namespace WindowsFormsPractice
             for(int i = 0; i < listFavorite.Items.Count; i++){
                 FavoriteData data2 = (FavoriteData)listFavorite.Items[i];
 
-                if (data1.Url.Equals(data2.Url)){
+                if (data1.GetUrl().Equals(data2.GetUrl())){
                     return true;
                 }
             }
@@ -187,12 +187,28 @@ namespace WindowsFormsPractice
     // お気に入りデータ
     public class FavoriteData 
     {
-        public String Title = "";
-        public String Url = "";
+        public String title = "";
+        public String url = "";
+
+        public void SetTitle(String t) {
+            this.title = t;
+        }
+
+        public String GetTitle() {
+            return this.title;
+        }
+
+        public void SetUrl(String u) {
+            this.url = u;
+        }
+
+        public String GetUrl() {
+            return this.url;
+        }
 
         public override string ToString()
         {
-            return Title;
+            return this.title;
         }
     }
 
@@ -202,5 +218,38 @@ namespace WindowsFormsPractice
         public int left   = 0;  // X座標
         public int width  = 0;  // 幅
         public int height = 0;  // 高さ
+
+        public int GetTop() {
+            return this.top;
+        }
+
+        public void SetTop(int t) {
+            this.top = t;
+        }
+
+        public int GetLeft() {
+            return this.left;
+        }
+
+        public void SetLeft(int l) {
+            this.left = l;
+        }
+        public int GetWidth()
+        {
+            return this.width;
+        }
+
+        public void SetWidth(int w) {
+            this.width = w;
+        }
+
+        public int GetHeight()
+        {
+            return this.height;
+        }
+
+        public void SetHeight(int h) {
+            this.height = h;
+        }
     }
 }
