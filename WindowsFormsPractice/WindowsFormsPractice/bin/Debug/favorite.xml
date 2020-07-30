@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfFavoriteData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <FavoriteData>
-    <Title>Google</Title>
-    <Url>https://www.google.co.jp/#spf=1595845363285</Url>
+    <title>Google</title>
+    <url>https://www.google.co.jp/#spf=1596102647077</url>
   </FavoriteData>
   <FavoriteData>
-    <Title>Yahoo! JAPAN</Title>
-    <Url>https://www.yahoo.co.jp/</Url>
+    <title>Yahoo! JAPAN</title>
+    <url>https://www.yahoo.co.jp/</url>
   </FavoriteData>
 </ArrayOfFavoriteData>
