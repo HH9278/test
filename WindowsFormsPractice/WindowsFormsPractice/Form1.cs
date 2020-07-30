@@ -14,6 +14,9 @@ namespace WindowsFormsPractice
 {
     public partial class Form1 : Form
     {
+        public const String favoriteFile = "favorite.xml";  // お気に入りを保存するXML
+        public const String locationFile = "location.xml";  // ウィンドウの位置情報を保存するXML
+
         public Form1()
         {
             InitializeComponent();
@@ -21,11 +24,11 @@ namespace WindowsFormsPractice
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (File.Exists("favorite.xml"))
+            if (File.Exists(favoriteFile))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<FavoriteData>));
                 List<FavoriteData> favoriteDataList = null;
-                using (StreamReader reader = new StreamReader("favorite.xml"))
+                using (StreamReader reader = new StreamReader(favoriteFile))
                 {
                     favoriteDataList = (List<FavoriteData>)serializer.Deserialize(reader);
                 }
@@ -39,7 +42,7 @@ namespace WindowsFormsPractice
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(LocationSizeData));
                 LocationSizeData locationSizeData = null;
-                using (StreamReader reader = new StreamReader("location.xml"))
+                using (StreamReader reader = new StreamReader(locationFile))
                 {
                     locationSizeData = (LocationSizeData)serializer.Deserialize(reader);
                     this.Top    = locationSizeData.top;
@@ -61,7 +64,7 @@ namespace WindowsFormsPractice
             }
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<FavoriteData>));
-            using (StreamWriter writer = new StreamWriter("favorite.xml", false, Encoding.UTF8)) {
+            using (StreamWriter writer = new StreamWriter(favoriteFile, false, Encoding.UTF8)) {
                 serializer.Serialize(writer, favoriteDataList);
             }
 
@@ -74,7 +77,7 @@ namespace WindowsFormsPractice
                 locationSizeData.height = this.Height;
 
                 XmlSerializer serializer_l = new XmlSerializer(typeof(LocationSizeData));
-                using (StreamWriter writer = new StreamWriter("location.xml", false, Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(locationFile, false, Encoding.UTF8))
                 {
                     serializer_l.Serialize(writer, locationSizeData);
                 }
