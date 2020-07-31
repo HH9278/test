@@ -133,3 +133,34 @@ df1 = pd.DataFrame(group_pinfo)
 df2 = pd.DataFrame(group_binfo)
 df1.to_csv("group_pinfo.csv", index=None)
 df2.to_csv("group_binfo.csv", index=None)
+
+# CSV JOIN
+!join -j 1 -t, "group_pinfo.csv" "group_binfo.csv"
+
+# CSV JOIN 2
+import pandas as pd
+
+df1 = pd.read_csv("group_pinfo.csv", index_col = 0)
+df2 = pd.read_csv("group_binfo.csv", index_col = 0)
+
+df3 = pd.merge(df1, df2, on='ID', how='inner')
+
+df3.to_csv("group_pbinfo.csv", index=None)
+
+# CSV TO SPACE
+import pandas as pd
+df_pb = pd.read_csv("group_pbinfo.csv", index_col=0)
+df_pb.to_csv("group_pbinfo_space.csv", sep=" ")
+!cat "group_pbinfo_space.csv"
+
+# CSV PROJECTION
+import pandas as pd
+
+df_pb = pd.read_csv("group_pbinfo.csv", index_col = 0)
+
+df_pb['”N—î'].to_csv('col1.txt', index = None)
+df_pb['Žï–¡'].to_csv('col2.txt', index = None)
+
+!cat col1.txt
+!echo '---'
+!cat col2.txt
