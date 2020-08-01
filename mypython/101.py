@@ -143,9 +143,9 @@ import pandas as pd
 df1 = pd.read_csv("group_pinfo.csv", index_col = 0)
 df2 = pd.read_csv("group_binfo.csv", index_col = 0)
 
-df3 = pd.merge(df1, df2, on='ID', how='inner')
+df3 = pd.merge(df1, df2, on='ID')
 
-df3.to_csv("group_pbinfo.csv", index=None)
+df3.to_csv("group_pbinfo.csv", index='ID')
 
 # CSV TO SPACE
 import pandas as pd
@@ -164,3 +164,12 @@ df_pb['趣味'].to_csv('col2.txt', index = None)
 !cat col1.txt
 !echo '---'
 !cat col2.txt
+
+# INSERT
+import pandas as pd
+df_pb = pd.read_csv("group_pbinfo.csv")
+df_pb1 = df_pb.iloc[:1,:]
+df_pb2 = df_pb.iloc[1:,:]
+dfi = pd.DataFrame([{"ID":6,"名前":"としお","年齢":54,"性別":"男","担当":"ボーカル","趣味":"クッキング"}],index=[6])
+df_con=pd.concat([df_pb1,dfi,df_pb2]).set_index('ID')
+print(df_con)
