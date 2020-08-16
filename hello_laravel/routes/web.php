@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 // 動画一覧画面を表示
 Route::get('/', 'FmobjController@showList')->name('fmobjs');
+
+// 動画詳細画面を表示
+Route::get('/fmobj/{id}', 'FmobjController@showDetail')->name('show');
